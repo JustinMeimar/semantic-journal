@@ -1,72 +1,75 @@
-from flask import Flask, jsonify, abort, request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 import json
 import os
 
+data_dir = "data"
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
+
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
-def home():
-    return 'Hello, Flask!'
+def index():
+    return "hello"
 
-def retrieve_journal_entry(date):
-    try:  
-        with open(date) as f:
-            return f
-    except:
-        return None
+@app.route('/add_journal', methods=['POST'])
+def add_journal():
+    request_data = request.get_json()
 
-@app.route('/get-journal/<date>', methods=['GET'])
-def get_journal(date):
-    try:
-        _year, month, day = map(int, date.split('-'))
-        assert 1 <= month <= 12 and 1 <= day <= 31
+    if 'date' not in request_data or 'content' not in request_data:
+        return jsonify({"error": "Invalid request data"}), 400
 
-        journal_entry = retrieve_journal_entry(date)
-
-        if not journal_entry:
-            pass # create journal entry
-
-        return jsonify(journal_entry)
+    goals_file_path = os.path.join(data_dir, 'goal.json')
     
-    except (ValueError, AssertionError):
-        abort(400, description="Invalid date format. Please use YYYY-MM-DD.")
+    if os.path.isfile(goals_file_path):
+        with open(goals_file_path, 'r') as file:
+            goal_data = json.load(file)
+    else:
+        return jsonify({"error": "Goal not found"}), 404
 
-@app.route('/startup')
-def startup():
-    try:
-        os.mkdir("journals")
-        return "Success"
-    except Exception as e:
-        return "failed, Existing Folder"
+    new_journal_entry = {
+        "date": request_data['date'],
+        "content": request_data['content']
+    }
+    goal_data['journals'].append(new_journal_entry)
 
-@app.route('/create_journal_entry', methods=['POST'])
-def create_journal_entry():
-    try:
-        json_data = request.json
-        param_value = json_data.get('file_name')
-        file_path = "./journals/" + param_value + ".json"
-        with open(file_path, "w") as file:
-            file.write("")
-        
-        return "Succesful Creation"
+    with open(goals_file_path, 'w') as file:
+        json.dump(goal_data, file, indent=4)
 
-    except Exception as e:
-        return "File Already Exists"
+    return jsonify({"message": "Journal added successfully"})
 
 
-@app.route('/remove_journal_entry', methods=['POST'])
-def remove_journal_entry():
-    try:
-        json_data = request.json
-        param_value = json_data.get('file_name')
+@app.route('/get_journals', methods=['GET'])
+def get_journals():
+    goals_file_path = os.path.join(data_dir, 'goal.json')
 
-    except Exception as e:
-        return "File Already Exists"
+    if os.path.isfile(goals_file_path):
+        with open(goals_file_path, 'r') as file:
+            goal_data = json.load(file)
+        return jsonify(goal_data.get('journals', []))
+    else:
+        return jsonify({"error": "Goal not found"}), 404
 
-    file_path = "./journals/" + param_value + ".json"
-    os.remove(file_path)
+@app.route('/create_goal', methods=['POST'])
+def create_goal():
+    request_data = request.get_json()
 
-    return ""
+    if 'metrics' not in request_data or not isinstance(request_data['metrics'], list):
+        return jsonify({"error": "Invalid or missing 'metrics' in request"}), 400
+
+    new_goal = {
+        "goal": request_data.get("goal", "unnamed-goal"),
+        "metrics": request_data['metrics'],
+        "journals": []
+    }
+
+    goals_file_path = os.path.join(data_dir, 'goal.json')
+    with open(goals_file_path, 'w') as file:
+        json.dump(new_goal, file, indent=4)
+
+    return jsonify({"message": "Goal data saved successfully"})
 
 if __name__ == '__main__':
     app.run(debug=True)

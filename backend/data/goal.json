@@ -1,0 +1,14 @@
+{
+    "goal": "Marathon Training",
+    "metrics": [
+        "Speed",
+        "Distance",
+        "Calories Burned"
+    ],
+    "journals": [
+        {
+            "date": "2024-01-10",
+            "content": "Today's training was tough, but feeling good!"
+        }
+    ]
+}
