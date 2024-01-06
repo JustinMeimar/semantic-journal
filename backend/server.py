@@ -7,6 +7,7 @@ data_dir = "data"
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
+
 app = Flask(__name__)
 CORS(app)
 
