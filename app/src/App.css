@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+html * {
+  font-size: 1em !important;
+  color: #fff !important;
+  font-family: sans-serif !important;
+  padding: 0;
+}
+
+html {
+  background-color: #444;
+
+}
+
+nav li {
+  float: left;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #111;
+}
+
+nav a:active {
+  background-color: #4CAF50;
+}

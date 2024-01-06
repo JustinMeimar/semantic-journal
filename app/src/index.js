@@ -25,6 +25,8 @@ import Home from "./pages/Home";
 import Journal from "./pages/Journal";
 import Chat from "./pages/Chat";
 
+import "./App.css";
+
 export default function App() {
   return (
     <BrowserRouter>
