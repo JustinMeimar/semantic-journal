@@ -16,6 +16,7 @@ class Chat extends React.Component {
             messageText: null,
             groupMessage: [
                 {"sender": "client", "data": {"text": "hello"}},
+                {"sender": "bot", "data": {"text": "hi"}},
             ],
             user: {
                 uid: "client"
@@ -62,13 +63,13 @@ class Chat extends React.Component {
                     {this.state.groupMessage.map(data => (
                         <div key={data.id}>
                             {data.sender === "client" ? (
-                                <li className="self">
+                                <li className="clientMessage">
                                     <div className="msg">
                                         <div className="message"> {data.data.text}</div>
                                     </div>
                                 </li>
                             ) : (
-                                <li className="other">
+                                <li className="botMessage">
                                     <div className="msg">
                                         <div className="message"> {data.data.text} </div>
                                     </div>
