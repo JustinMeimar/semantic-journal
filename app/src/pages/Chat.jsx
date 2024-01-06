@@ -81,7 +81,7 @@ class Chat extends React.Component {
                 <div className="chatInputWrapper">
                     <form onSubmit={this.handleSubmit}>
                         <input
-                        className="textarea input"
+                        className="messageInput"
                         type="text"
                         placeholder="Enter your message..."
                         onChange={this.handleChange}
