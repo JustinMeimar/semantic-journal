@@ -36,3 +36,81 @@
     transform: rotate(360deg);
   }
 }
+
+html * {
+  font-size: 1em !important;
+  color: #fff !important;
+  font-family: sans-serif !important;
+  padding: 0;
+}
+
+html {
+  background-color: #444;
+
+}
+
+nav li {
+  float: left;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #111;
+}
+
+nav a:active {
+  background-color: #4CAF50;
+}
+
+.chatWindow {
+  padding: 10px;
+}
+
+.clientMessage {
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #4CAF50;
+  display: inline-block;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  max-width: 75%;
+  float: right;
+  clear: both;
+}
+
+.botMessage {
+  border: 2px solid #4C50AF;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #4C50AF;
+  display: inline-block;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  max-width: 75%;
+  float: left;
+  clear: both;
+}
+
+.messageInput {
+  background-color: #333;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
