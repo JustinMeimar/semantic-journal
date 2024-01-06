@@ -7,6 +7,14 @@ app = Flask(__name__)
 def home():
     return 'Hello, Flask!'
 
+@app.route('/startup')
+def startup():
+    try:
+        os.mkdir("journals")
+        return "Success"
+    except Exception as e:
+        return "failed, Existing Folder"
+
 @app.route('/create_journal_entry', methods=['POST'])
 def create_journal_entry():
     try:
