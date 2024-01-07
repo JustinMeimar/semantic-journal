@@ -15,6 +15,24 @@ CORS(app)
 def index():
     return "hello"
 
+@app.route('/gen_metrics', methods=['POST'])
+def gen_metrics():
+
+    request_data = request.get_json()
+
+    if 'goal' not in request_data:
+        return jsonify({"error": "Invalid request data"}), 400
+
+    goal = request_data['goal']
+
+    # seif generate metrics function here 
+
+    return jsonify({
+        "metric-1": "mock metric",
+        "metric-2": "mock metric",
+        "metric-3": "mock metric" 
+    })
+
 @app.route('/add_journal', methods=['POST'])
 def add_journal():
     request_data = request.get_json()
