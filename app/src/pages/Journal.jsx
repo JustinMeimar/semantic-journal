@@ -22,10 +22,17 @@ const Journal = () => {
     useEffect(() => {
         const getJournals = async () => {
             const journalsData = await fetchJournals();
-            setJournalContent(journalsData[0].content);
+            if (journalsData && journalsData.length > 0) {
+                // Only set the journal content if journalsData is not empty
+                setJournalContent(journalsData[0].content);
+            } else {
+                // Handle the case where journalsData is empty or undefined
+                setJournalContent("No journals available.");
+            }
             setJournals(journalsData);
         };
         getJournals();
+    
     }, [])
     
     const getTodaysDate = () => {
