@@ -1,18 +1,27 @@
 {
-    "goal": "run marathon.",
+    "goal": "eat more",
     "metrics": {
-        "metric-1": "loosing beer belly",
-        "metric-2": "# times run",
-        "metric-3": "water drank"
+        "metric-1": "Regularity of meals",
+        "metric-2": "Portion sizes of meals",
+        "metric-3": "Number of meals containing fruits and vegetables"
     },
     "journals": [
         {
-            "date": "07-01-2024",
-            "content": "Today I lost 5 pounds!",
+            "date": "06-20-2024",
+            "content": "ate soo much",
             "quantities": [
-                7,
-                8,
-                9
+                1.0,
+                0.5,
+                0.0
+            ]
+        },
+        {
+            "date": "07-01-2024",
+            "content": "ate a little",
+            "quantities": [
+                0.0,
+                2.0,
+                0.0
             ]
         }
     ]
