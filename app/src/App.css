@@ -79,6 +79,7 @@ nav a:active {
 
 .chatWindow {
   padding: 10px;
+  overflow: hidden;
 }
 
 .clientMessage {
@@ -113,6 +114,10 @@ nav a:active {
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
+  display : flex;
+  align-items : center;
+  padding : 10px;
+  
 }
 
 .entryHeader {
@@ -150,4 +155,10 @@ nav a:active {
   box-sizing: border-box;
   margin-bottom: 1em;
   margin-top: 0.25em;
+}
+
+body{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top : 0 ;
 }
