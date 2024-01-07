@@ -1,59 +1,14 @@
 {
-    "goal": "My goal is to get obese",
+    "goal": "run marathon.",
     "metrics": {
-        "metric-1": "mock metric",
-        "metric-2": "mock metric",
-        "metric-3": "mock metric"
+        "metric-1": "loosing beer belly",
+        "metric-2": "# times run",
+        "metric-3": "water drank"
     },
     "journals": [
         {
-            "date": "06-01-2024",
-            "content": "testing.",
-            "quantities": [
-                7,
-                8,
-                9
-            ]
-        },
-        {
-            "date": "05-01-2024",
-            "content": "another one.",
-            "quantities": [
-                7,
-                8,
-                9
-            ]
-        },
-        {
-            "date": "04-01-2024",
-            "content": "money",
-            "quantities": [
-                7,
-                8,
-                9
-            ]
-        },
-        {
-            "date": "03-01-2024",
-            "content": "testiing 123",
-            "quantities": [
-                7,
-                8,
-                9
-            ]
-        },
-        {
-            "date": "02-01-2024",
-            "content": "testing.",
-            "quantities": [
-                7,
-                8,
-                9
-            ]
-        },
-        {
-            "date": "01-01-2024",
-            "content": "money testing.",
+            "date": "07-01-2024",
+            "content": "Today I lost 5 pounds!",
             "quantities": [
                 7,
                 8,
