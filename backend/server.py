@@ -57,6 +57,7 @@ def add_journal():
     request_data = request.get_json()
 
     if 'date' not in request_data or 'content' not in request_data:
+        print(f"missing fields in request: {request_data}")
         return jsonify({"error": "Invalid request data"}), 400
 
     goals_file_path = os.path.join(data_dir, 'goal.json')
@@ -99,26 +100,56 @@ def get_journals():
     else:
         return jsonify({"error": "Goal not found"}), 404
 
+def gpt_response(user_message, goal_data):
+    from openai import OpenAI
+    from dotenv import load_dotenv
+    load_dotenv()
 
+    try:
+        CLIENT = OpenAI()
+
+        messages = [
+            {"role": "system", "content": "You are Samantha, the semantic journal assistant.\
+             The following is a journal for tracking progress towards a goal.\
+             please help the user with achieving their goal and evaluating their metrics"},
+            {"role": "system", "content": json.dumps(goal_data, indent=4)},
+            {"role": "user", "content": user_message}
+        ]
+        
+        response = CLIENT.chat.completions.create(
+            model='gpt-4',
+            messages=messages,
+        )
+
+        print(response)
+        return response.choices[0].message.content
+    
+    except Exception as e:
+        print(f"Error in generating response: {e}")
+        return "Sorry, I couldn't process that."
+
+    
 @app.route('/send_message', methods=['POST'])
 def send_message():
     request_data = request.get_json()
 
-    if 'message' not in request_data:
-        return jsonify({"error": "Invalid request data"}), 400
-    # request["message"]   holds data being sent
-    # connect to API TODO
+    if 'message' not in request_data or request_data['message'] is None:
+        return jsonify({"error": "Message is required"}), 400
 
+    user_message = request_data["message"]
 
+    try:
+        with open("data/goal.json", "r") as file:
+            goal_data = json.load(file)
+        gpt_response_text = gpt_response(user_message, goal_data)
+        
+        return jsonify({"response": gpt_response_text})
 
-    return jsonify({"message": "Send data"})
+    except FileNotFoundError:
+        return jsonify({"error": "Goal file not found"}), 404
 
-@app.route('/get_message', methods=["GET"])
-def get_message():
-    # stub function, add chat functionality
-
-    return jsonify({"message": "textData"})
-
+    except json.JSONDecodeError:
+        return jsonify({"error": "Invalid JSON in goal file"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
