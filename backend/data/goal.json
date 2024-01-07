@@ -1,18 +1,27 @@
 {
-    "goal": "eat healthier",
+    "goal": "eat more",
     "metrics": {
-        "metric-1": "Daily consumption of fruits and vegetables",
-        "metric-2": "Amount of processed foods eaten",
-        "metric-3": "Number of healthy meals prepared at home"
+        "metric-1": "Amount of food consumed",
+        "metric-2": "Variety of foods consumed",
+        "metric-3": "Number of meals eaten per day"
     },
     "journals": [
         {
             "date": "07-01-2024",
-            "content": "ate not too much today...",
+            "content": "ate nothing today",
             "quantities": [
-                7,
-                8,
-                9
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "date": "07-01-2024",
+            "content": "ate all the foods today",
+            "quantities": [
+                10.0,
+                10.0,
+                10.0
             ]
         }
     ]

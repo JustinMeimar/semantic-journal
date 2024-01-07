@@ -42,12 +42,9 @@ def gen_metrics():
         return jsonify({"error": "Invalid request data"}), 400
 
     goal = request_data['goal']
-    print(12345)
     metrics = {f'metric-{i+1}': mock_metric
                     for i, mock_metric in enumerate(generate_metric(goal))}
     
-    print("out")
-
     create_goal(goal, metrics)
 
     return jsonify(metrics)
@@ -69,9 +66,10 @@ def add_journal():
 
     # TODO: proprely implement the GPT stuff  
     # call functions to get numbers from prompts
-    # convos = init_chat(goal_data['metrics'])
-    # nums = get_nums(convos, request_data['content'])
-    nums = [7,8,9]
+    print("goals are", goal_data['metrics'])
+    convos = init_chat(goal_data['metrics'])
+    nums = get_nums(convos, request_data['content'])
+    # nums = [7,8,9]
 
     new_journal_entry = {
         "date": request_data['date'],
