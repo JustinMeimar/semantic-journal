@@ -85,7 +85,39 @@ nav a:active {
 }
 
 
-.clientMessage, .botMessage {
+.mainContainer {
+    display: flex;
+    width: 100%;
+}
+
+/* .journalsBrowserEntry {
+  background-color: white;
+} */
+
+.journalBrowserEntry:hover {
+    color: limegreen;
+}
+
+.journalsBrowser {
+    width: 15%;
+    padding: 20px;
+    margin-top: 10px;
+    /* background-color: #686868; */
+}
+
+.rightContainer {
+    width: 70%;
+}
+
+.journalTitleContainer {
+    font-size: 48px; /* Large font size */
+    text-align: center; /* Centers text horizontally */
+    display: block; /* Use block to occupy the entire line */
+    width: 100%; /* Full width to ensure centering */
+    margin: 20px 0; /* Margin for spacing around the container */
+}
+
+.clientMessage {
   border: 2px solid #4CAF50;
   border-radius: 10px;
   padding: 10px;
