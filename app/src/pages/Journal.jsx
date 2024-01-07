@@ -3,7 +3,6 @@ import React from "react";
 class Journal extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             goal: {metrics: ["Running speed", "Heart rate", "Distance"]}
         };
