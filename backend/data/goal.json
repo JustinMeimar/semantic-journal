@@ -7,6 +7,33 @@
     },
     "journals": [
         {
+            "date": "02-01-2024",
+            "content": "No hackathons, but I'm looking forward to the next one!",
+            "quantities": [
+                0.0,
+                0.0,
+                2.0
+            ]
+        },
+        {
+            "date": "03-01-2024",
+            "content": "I won my first hackathon today! A full 24 hours. No new languages, but I did learn a lot about python",
+            "quantities": [
+                10.0,
+                10.0,
+                2.0
+            ]
+        },
+        {
+            "date": "04-01-2024",
+            "content": "I signed up for HackED 2024. I started learning react.js for it",
+            "quantities": [
+                0.0,
+                2.0,
+                5.0
+            ]
+        },
+        {
             "date": "05-01-2024",
             "content": "No hackathons today :(",
             "quantities": [
