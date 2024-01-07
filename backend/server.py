@@ -15,6 +15,11 @@ CORS(app)
 def index():
     return "hello"
 
+@app.route('/')
+def gen_metrics():
+
+    return jsonify({"metric-1": "mock metric"})
+
 @app.route('/add_journal', methods=['POST'])
 def add_journal():
     request_data = request.get_json()
