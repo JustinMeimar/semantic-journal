@@ -1,202 +1,91 @@
-// import React from "react";
-// import Chart from "chart.js/auto";
+import React, { useState, useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 
-// export default class Home extends React.Component {
-//     chartRef = React.createRef();
+const Home = () => {
+    const [goal, setGoal] = useState('');
+    const chartRef = useRef(null);
+    const [metrics, setMetrics] = useState({
+        "metric-1": "metric-1",
+        "metric-2": "metric-2",
+        "metric-3": "metric-3",
+    });
+    const chartInstanceRef = useRef(null); // Ref to store the chart instance
 
-    // componentDidMount() {
-	// 	const ctx = this.chartRef.current.getContext("2d");
-		
-	// 	new Chart(ctx, {
-	// 		type: "line",
-	// 		data: {
-	// 			labels: ["", "", "", "", "", "", ""],
-	// 			datasets: [{ 
-	// 				data: [86,114,106,106,107,111,133],
-	// 				label: "Running Speed",
-	// 				borderColor: "#3e95cd",
-	// 				backgroundColor: "#7bb6dd",
-	// 				fill: false,
-	// 			}, { 
-	// 				data: [70,90,44,60,83,90,100],
-	// 				label: "Heart Rate",
-	// 				borderColor: "#3cba9f",
-	// 				backgroundColor: "#71d1bd",
-	// 				fill: false,
-	// 			}, { 
-	// 				data: [10,21,60,44,17,21,17],
-	// 				label: "Level of Intensity",
-	// 				borderColor: "#ffa500",
-	// 				backgroundColor:"#ffc04d",
-	// 				fill: false,
-	// 			},
-	// 			]
-	// 		},
-    //         options: {
-    //             plugins: {
-    //                 legend: {
-    //                     labels: {
-    //                         color: '#ffffff'
-    //                     }
-    //                 }
-    //             },
-    //             scales: {
-    //                 x: {
-    //                     ticks: {
-    //                         color: '#ffffff'
-    //                     },
-    //                     grid: {
-    //                         color: '#666'
-    //                     }
-    //                 },
-    //                 y: {
-    //                     ticks: {
-    //                         color: '#ffffff'
-    //                     },
-    //                     grid: {
-    //                         color: '#666'
-    //                     }
-    //                 }
-    //             }
-    //         }
-	// 	});
-	// }
+    useEffect(() => {
+        if (chartRef.current) {
 
-//     getMetrics = (event) => {
-//         event.preventDefault();
-//         const apiUrl = 'http://localhost:5000';
+            const ctx = chartRef.current.getContext('2d');
+            
+            if (chartInstanceRef.current) {
+                chartInstanceRef.current.destroy();
+            }
 
-//         fetch(`${apiUrl}/gen_metrics`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({ goal: this.state.goal }),
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('Metrics:', data);
-//             // Handle your data here
-//         })
-//         .catch((error) => {
-//             console.error('Error:', error);
-//         });
-//     }
-
-//     handleGoalChange = (event) => {
-//         this.setState({ goal: event.target.value });
-//     }
-
-//     render() {
-//         return (
-//             <div style={{ textAlign: 'center' }}>
-//                 <h2>Enter Your Goal</h2>
-//                 <form onSubmit={this.getMetrics}>
-//                     <input 
-//                         type="text" 
-//                         style={{ width: '60%', padding: '10px', fontSize: '16px' }} 
-//                         placeholder="Type your goal here..." 
-//                         value={this.state.goal}
-//                         onChange={this.handleGoalChange}
-//                     />
-//                     <br />
-//                     <button 
-//                         type="submit"
-//                         style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px' }}
-//                     >
-//                         Submit Goal
-//                     </button>
-//                 </form>
-//                 <br /><br />
-//                 <canvas id="myChart" ref={this.chartRef} />
-//             </div>
-//         );
-//     }
-// }
-
-import React from "react";
-import Chart from "chart.js/auto";
-
-export default class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { goal: "" };
-        this.chartRef = React.createRef();
-
-        // Binding 'this' to the class methods
-        this.getMetrics = this.getMetrics.bind(this);
-        this.handleGoalChange = this.handleGoalChange.bind(this);
-    }
-
-    componentDidMount() {
-        const ctx = this.chartRef.current.getContext("2d");
-        new Chart(ctx, {
-			type: "line",
-			data: {
-				labels: ["", "", "", "", "", "", ""],
-				datasets: [{ 
-					data: [86,114,106,106,107,111,133],
-					label: "Running Speed",
-					borderColor: "#3e95cd",
-					backgroundColor: "#7bb6dd",
-					fill: false,
-				}, { 
-					data: [70,90,44,60,83,90,100],
-					label: "Heart Rate",
-					borderColor: "#3cba9f",
-					backgroundColor: "#71d1bd",
-					fill: false,
-				}, { 
-					data: [10,21,60,44,17,21,17],
-					label: "Level of Intensity",
-					borderColor: "#ffa500",
-					backgroundColor:"#ffc04d",
-					fill: false,
-				},
-				]
-			},
-            options: {
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#ffffff'
-                        }
-                    }
+            chartInstanceRef.current = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: ["", "", "", "", "", "", ""],
+                    datasets: [{ 
+                        data: [86,114,106,106,107,111,133],
+                        label: metrics["metric-1"], 
+                        borderColor: "#3e95cd",
+                        backgroundColor: "#7bb6dd",
+                        fill: false,
+                    }, { 
+                        data: [70,90,44,60,83,90,100],
+                        label: metrics["metric-2"], 
+                        borderColor: "#3cba9f",
+                        backgroundColor: "#71d1bd",
+                        fill: false,
+                    }, { 
+                        data: [10,21,60,44,17,21,17],
+                        label: metrics["metric-3"], 
+                        borderColor: "#ffa500",
+                        backgroundColor:"#ffc04d",
+                        fill: false,
+                    },
+                    ]
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: '#ffffff'
-                        },
-                        grid: {
-                            color: '#666'
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
                         }
                     },
-                    y: {
-                        ticks: {
-                            color: '#ffffff'
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: '#666'
+                            }
                         },
-                        grid: {
-                            color: '#666'
+                        y: {
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: '#666'
+                            }
                         }
                     }
                 }
-            }
-		});
-    }
+            });
+        }
+    }, [metrics]);
 
-    getMetrics(event) {
-        console.log("testing")
-
+    const getMetrics = (event) => {
         event.preventDefault();
-        const apiUrl = 'http://localhost:5000/create_goal';
+        const apiUrl = 'http://localhost:5000';
 
         fetch(`${apiUrl}/gen_metrics`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ goal: this.state.goal }),
+            body: JSON.stringify({ goal }),
         })
         .then(response => {
             if (response.ok) {
@@ -206,39 +95,94 @@ export default class Home extends React.Component {
         })
         .then(data => {
             console.log('Metrics:', data);
+            setMetrics(data);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-    }
+    };
 
-    handleGoalChange(event) {
-        this.setState({ goal: event.target.value });
-    }
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <h2>Enter Your Goal</h2>
+            <form onSubmit={getMetrics}>
+                <input 
+                    type="text"
+                    style={{ width: '60%', padding: '10px', fontSize: '16px' }}
+                    placeholder="Type your goal here..."
+                    value={goal}
+                    onChange={(e) => setGoal(e.target.value)}
+                />
+                <br />
+                <button 
+                    type="submit"
+                    style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px' }}
+                >
+                    Submit Goal
+                </button>
+            </form>
+            <br /><br />
+            <canvas id="myChart" ref={chartRef} />
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div style={{ textAlign: 'center' }}>
-                <h2>Enter Your Goal</h2>
-                <form onSubmit={this.getMetrics}>
-                    <input 
-                        type="text"
-                        style={{ width: '60%', padding: '10px', fontSize: '16px' }}
-                        placeholder="Type your goal here..."
-                        value={this.state.goal}
-                        onChange={this.handleGoalChange}
-                    />
-                    <br />
-                    <button 
-                        type="submit"
-                        style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px' }}
-                    >
-                        Submit Goal
-                    </button>
-                </form>
-                <br /><br />
-                <canvas id="myChart" ref={this.chartRef} />
-            </div>
-        );
-    }
-}
+export default Home;
+
+
+
+// 
+
+// new Chart(ctx, {
+// 			type: "line",
+// 			data: {
+// 				labels: ["", "", "", "", "", "", ""],
+// 				datasets: [{ 
+// 					data: [86,114,106,106,107,111,133],
+// 					label: "Running Speed",
+// 					borderColor: "#3e95cd",
+// 					backgroundColor: "#7bb6dd",
+// 					fill: false,
+// 				}, { 
+// 					data: [70,90,44,60,83,90,100],
+// 					label: "Heart Rate",
+// 					borderColor: "#3cba9f",
+// 					backgroundColor: "#71d1bd",
+// 					fill: false,
+// 				}, { 
+// 					data: [10,21,60,44,17,21,17],
+// 					label: "Level of Intensity",
+// 					borderColor: "#ffa500",
+// 					backgroundColor:"#ffc04d",
+// 					fill: false,
+// 				},
+// 				]
+// 			},
+//             options: {
+//                 plugins: {
+//                     legend: {
+//                         labels: {
+//                             color: '#ffffff'
+//                         }
+//                     }
+//                 },
+//                 scales: {
+//                     x: {
+//                         ticks: {
+//                             color: '#ffffff'
+//                         },
+//                         grid: {
+//                             color: '#666'
+//                         }
+//                     },
+//                     y: {
+//                         ticks: {
+//                             color: '#ffffff'
+//                         },
+//                         grid: {
+//                             color: '#666'
+//                         }
+//                     }
+//                 }
+//             }
+// 		});
