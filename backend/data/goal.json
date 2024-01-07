@@ -1,27 +1,36 @@
 {
-    "goal": "eat more",
+    "goal": "Winning more hackathons",
     "metrics": {
-        "metric-1": "Regularity of meals",
-        "metric-2": "Portion sizes of meals",
-        "metric-3": "Number of meals containing fruits and vegetables"
+        "metric-1": "Hours spent on coding and problem-solving",
+        "metric-2": "Number of completed projects or hackathons participated in",
+        "metric-3": "Learning and implementing new programming skills or languages"
     },
     "journals": [
         {
-            "date": "06-20-2024",
-            "content": "ate soo much",
+            "date": "05-01-2024",
+            "content": "No hackathons today :(",
             "quantities": [
-                1.0,
-                0.5,
+                0.0,
+                0.0,
                 0.0
             ]
         },
         {
-            "date": "07-01-2024",
-            "content": "ate a little",
+            "date": "06-01-2024",
+            "content": "Today I started hackED 2024!\nWe didn't go in with any ideas, but I hope we come up with a good one! I used react.js for the first time",
             "quantities": [
-                0.0,
-                2.0,
-                0.0
+                5.5,
+                5.0,
+                10.0
+            ]
+        },
+        {
+            "date": "07-01-2024",
+            "content": "Today I finished hackED 2024!\nWe made this very app! I woke up early to make sure we got it done",
+            "quantities": [
+                7.5,
+                10.0,
+                5.0
             ]
         }
     ]
