@@ -5,6 +5,7 @@ import os
 import openai
 
 from quantify_goals import *
+from goal_creation import generate_metric
 
 data_dir = "data"
 if not os.path.exists(data_dir):
@@ -40,17 +41,9 @@ def gen_metrics():
 
     goal = request_data['goal']
 
-    # seif generate metrics function here
+    return jsonify({f'metric-{i+1}': mock_metric
+                    for i, mock_metric in enumerate(generate_metric(goal))})
 
-    metrics = {
-        "metric-1": "mock metric",
-        "metric-2": "mock metric",
-        "metric-3": "mock metric"
-    }
-    
-    create_goal(goal, metrics)
-    
-    return jsonify(metrics)
 
 @app.route('/add_journal', methods=['POST'])
 def add_journal():
