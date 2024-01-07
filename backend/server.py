@@ -3,6 +3,8 @@ from flask_cors import CORS
 import json
 import os
 
+from quantify_goals import *
+
 data_dir = "data"
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
@@ -29,10 +31,15 @@ def add_journal():
             goal_data = json.load(file)
     else:
         return jsonify({"error": "Goal not found"}), 404
+    
+    # call functions to get numbers from prompts
+    convos = init_chat(goal_data['metrics'])
+    nums = get_nums(convos, request_data['content'])
 
     new_journal_entry = {
         "date": request_data['date'],
-        "content": request_data['content']
+        "content": request_data['content'],
+        "quantities": nums
     }
     goal_data['journals'].append(new_journal_entry)
 
