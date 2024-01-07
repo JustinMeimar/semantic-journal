@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 /*
 function Chat() {
@@ -26,11 +27,26 @@ class Chat extends React.Component {
 
     }
 
-    sendMessage = () => {
+    sendMessage = async () => {
         // send message to server
         // add message to messages
 
-        console.log(this.state.messageText);
+        // sends message to server
+        try{
+            // sends message to server
+            const formData = {"message": this.state.messageText }
+            console.log(formData)
+            const response = await axios.post("http://127.0.0.1:5000/send_message", formData, 
+            {headers : {
+                'Content-Type' : 'application/json',
+            },});
+            
+            
+
+        } catch(e){
+
+        }
+        // saves data to context
         this.state.groupMessage.push({"sender": "client", "data": {"text": this.state.messageText}});
         this.setState({ messageText: null });
     };
@@ -54,6 +70,9 @@ class Chat extends React.Component {
         // listen for messages from server
         // add message to messages
         // TODO
+        
+
+
     };
 
     render() {
