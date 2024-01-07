@@ -49,6 +49,7 @@ class Chat extends React.Component {
         // saves data to context
         this.state.groupMessage.push({"sender": "client", "data": {"text": this.state.messageText}});
         this.setState({ messageText: null });
+        this.messageListener();
     };
 
     scrollToBottom = () => {
@@ -66,11 +67,18 @@ class Chat extends React.Component {
         this.setState({ messageText: event.target.value });
     };
 
-    messageListener = () => {
-        // listen for messages from server
-        // add message to messages
-        // TODO
-        
+    messageListener = async () => {
+        try {
+      
+            const response = await axios.get('http://127.0.0.1:5000/get_message');
+            // waits for data to arrive
+            
+            console.log(response.data)
+
+          } catch (error) {
+
+          } 
+        // TODO create a message after getting data
 
 
     };

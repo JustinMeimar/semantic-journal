@@ -113,6 +113,11 @@ def send_message():
 
     return jsonify({"message": "Send data"})
 
+@app.route('/get_message', methods=["GET"])
+def get_message():
+    # stub function, add chat functionality
+
+    return jsonify({"message": "textData"})
 
 
 if __name__ == '__main__':
