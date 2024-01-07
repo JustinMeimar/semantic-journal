@@ -46,7 +46,13 @@ html * {
 
 html {
   background-color: #444;
+  margin: 2em;
+  border-radius: 10px;
+}
 
+nav {
+  padding: 0px;
+  margin: 0px;
 }
 
 nav li {
@@ -55,10 +61,11 @@ nav li {
 
 nav ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   overflow: hidden;
   background-color: #333;
+  border-radius: 10px;
 }
 
 nav a {
@@ -110,6 +117,7 @@ nav a:active {
 .messageInput {
   background-color: #333;
   border: none;
+  border-radius: 10px;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -124,6 +132,7 @@ nav a:active {
 .entryPrompt {
   background-color: #333;
   border: none;
+  border-radius: 10px;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -150,4 +159,26 @@ nav a:active {
   box-sizing: border-box;
   margin-bottom: 1em;
   margin-top: 0.25em;
+}
+
+.goalPrompt {
+  background-color: #333;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.goalSubmit {
+  background-color: #4CAF50;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  margin-top: 0.25em;
+}
+
+#myChart {
+  max-width: 800px;
 }
