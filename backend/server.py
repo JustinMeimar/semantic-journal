@@ -25,7 +25,7 @@ def gen_metrics():
 
     goal = request_data['goal']
 
-    # seif generate metrics function here 
+    # seif generate metrics function here
 
     return jsonify({
         "metric-1": "mock metric",
