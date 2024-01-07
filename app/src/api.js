@@ -49,3 +49,5 @@ const get_journals = () => {
         console.error('Error:', error);
     });
 }
+
+export { add_journal };
