@@ -5,6 +5,7 @@ import os
 import openai
 
 from quantify_goals import *
+from goal_creation import generate_metric
 
 data_dir = "data"
 if not os.path.exists(data_dir):
@@ -26,6 +27,8 @@ def create_goal(goal, metrics):
         "metrics": metrics, 
         "journals": []
     }
+
+    print("out")
     goals_file_path = os.path.join(data_dir, 'goal.json')
     with open(goals_file_path, 'w') as file:
         json.dump(new_goal, file, indent=4)
@@ -39,17 +42,11 @@ def gen_metrics():
         return jsonify({"error": "Invalid request data"}), 400
 
     goal = request_data['goal']
-
-    # seif generate metrics function here
-
-    metrics = {
-        "metric-1": "mock metric",
-        "metric-2": "mock metric",
-        "metric-3": "mock metric"
-    }
+    metrics = {f'metric-{i+1}': mock_metric
+                    for i, mock_metric in enumerate(generate_metric(goal))}
     
     create_goal(goal, metrics)
-    
+
     return jsonify(metrics)
 
 @app.route('/add_journal', methods=['POST'])
@@ -68,9 +65,13 @@ def add_journal():
     else:
         return jsonify({"error": "Goal not found"}), 404
 
-    # TODO: properly implement the GPT stuff
-    # nums = get_nums(convos, request_data['content'])
-    nums = [7, 8, 9]
+    # TODO: proprely implement the GPT stuff  
+    # call functions to get numbers from prompts
+    print("goals are", goal_data['metrics'])
+    convos = init_chat(goal_data['metrics'])
+    nums = get_nums(convos, request_data['content'])
+
+    # nums = [7, 8, 9]
     existing_journal = next((item for item in goal_data['journals'] if item['date'] == request_data['date']), None)
 
     if existing_journal:
