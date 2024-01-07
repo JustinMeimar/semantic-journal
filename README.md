@@ -11,6 +11,10 @@ At any time, you can chat with her about how your progress is going.
 <br>
 Created using a Flask backend, and a react.js frontend, with GPT-4 integration.
 
+![image info](readmePhotos/home.png)
+![image info](readmePhotos/journal.png)
+![image info](readmePhotos/chat.png)
+
 ## Running Instructions
 
 Start Frontend
