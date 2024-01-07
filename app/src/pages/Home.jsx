@@ -112,11 +112,13 @@ const Home = () => {
                     placeholder="Type your goal here..."
                     value={goal}
                     onChange={(e) => setGoal(e.target.value)}
+                    className="goalPrompt"
                 />
                 <br />
                 <button 
                     type="submit"
                     style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px' }}
+                    className="goalSubmit"
                 >
                     Submit Goal
                 </button>
