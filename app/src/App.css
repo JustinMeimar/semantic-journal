@@ -88,6 +88,30 @@ nav a:active {
   padding: 10px;
 }
 
+.mainContainer {
+    display: flex;
+    width: 100%;
+}
+
+/* .journalsBrowserEntry {
+  background-color: white;
+} */
+
+.journalBrowserEntry:hover {
+    color: limegreen;
+}
+
+.journalsBrowser {
+    width: 20%;
+    padding: 10px;
+    margin-top: 10px;
+    /* background-color: #686868; */
+}
+
+.rightContainer {
+    width: 70%;
+}
+
 .journalTitleContainer {
     font-size: 48px; /* Large font size */
     text-align: center; /* Centers text horizontally */
