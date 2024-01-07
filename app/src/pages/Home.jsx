@@ -70,7 +70,8 @@ const Home = () => {
                                 color: '#666'
                             }
                         }
-                    }
+                    },
+                    maintainAspectRatio: true,
                 }
             });
         }

@@ -178,3 +178,7 @@ nav a:active {
   margin-bottom: 1em;
   margin-top: 0.25em;
 }
+
+#myChart {
+  max-width: 800px;
+}
