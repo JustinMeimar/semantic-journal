@@ -26,15 +26,17 @@ def generate_metric(goal):
     CONVOS.append({'role': 'assistant', 
                    'content': response.choices[0].message.content})
     print(response.choices[0].message.content)
-    while True: 
-        user = input()
-        if user == 'STOP':
-            break
-        else:
-            CONVOS.append({'role':'user','content': user})
-            response=get_responses(CONVOS)
-            CONVOS.append({'role': 'assistant', 
-                           'content': response.choices[0].message.content})
-            print(response.choices[0].message.content)
+    
+    # THIS IS for vetoing goals. We aren't implementing this?
+    # while True: 
+    #     user = input()
+    #     if user == 'STOP':
+    #         break
+    #     else:
+    #         CONVOS.append({'role':'user','content': user})
+    #         response=get_responses(CONVOS)
+    #         CONVOS.append({'role': 'assistant', 
+    #                        'content': response.choices[0].message.content})
+    #         print(response.choices[0].message.content)
 
     return CONVOS[-1]['content'].split('\n')

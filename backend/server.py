@@ -27,6 +27,8 @@ def create_goal(goal, metrics):
         "metrics": metrics, 
         "journals": []
     }
+
+    print("out")
     goals_file_path = os.path.join(data_dir, 'goal.json')
     with open(goals_file_path, 'w') as file:
         json.dump(new_goal, file, indent=4)
@@ -40,10 +42,15 @@ def gen_metrics():
         return jsonify({"error": "Invalid request data"}), 400
 
     goal = request_data['goal']
+    print(12345)
+    metrics = {f'metric-{i+1}': mock_metric
+                    for i, mock_metric in enumerate(generate_metric(goal))}
+    
+    print("out")
 
-    return jsonify({f'metric-{i+1}': mock_metric
-                    for i, mock_metric in enumerate(generate_metric(goal))})
+    create_goal(goal, metrics)
 
+    return jsonify(metrics)
 
 @app.route('/add_journal', methods=['POST'])
 def add_journal():
