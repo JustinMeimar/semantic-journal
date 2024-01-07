@@ -14,25 +14,29 @@ const fetchJournals = async () => {
     }
 }
 
+const getFormattedDate = (date) => {
+    const formattedDate  =`${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
+    return formattedDate;
+}
+
 const Journal = () => {
     
     const [journalContent, setJournalContent] = useState("");
     const [journals, setJournals] = useState([]);
+    const [journalDate, setJournalDate] = useState();
 
     useEffect(() => {
         const getJournals = async () => {
             const journalsData = await fetchJournals();
             if (journalsData && journalsData.length > 0) {
-                // Only set the journal content if journalsData is not empty
                 setJournalContent(journalsData[0].content);
             } else {
-                // Handle the case where journalsData is empty or undefined
                 setJournalContent("No journals available.");
             }
             setJournals(journalsData);
         };
         getJournals();
-    
+        setJournalDate();
     }, [])
     
     const getTodaysDate = () => {
@@ -43,9 +47,10 @@ const Journal = () => {
     const recordJournal = () => {
         const apiUrl = "http://127.0.0.1:5000/add_journal" 
         const today = new Date();
-        const formattedDate = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
+        const formattedDate = getFormattedDate(today);
+        console.log("journalDate:", journalDate);
         const journalData = {
-            date: formattedDate,
+            date: journalDate,
             content: journalContent
         }; 
         fetch(apiUrl, {
@@ -59,9 +64,6 @@ const Journal = () => {
             console.log("response:", response)
             response.json() 
         })
-        .then(data => {
-            console.log('Journal added:', data);
-        })
         .catch((error) => {
             console.error('Error:', error);
         });
@@ -73,8 +75,9 @@ const Journal = () => {
         setJournalContent(event.target.value);
     };
 
-    const handleJournalSelect = (content) => {
-        setJournalContent(content);
+    const handleJournalSelect = (journal) => {
+        setJournalContent(journal.content);
+        setJournalDate(journal.date);
     };
 
     return (
@@ -85,7 +88,7 @@ const Journal = () => {
                     {journals.map((journal, index) => (
                         <div key={index} 
                             className="journalBrowserEntry"
-                            onClick={() => handleJournalSelect(journal.content)} 
+                            onClick={() => handleJournalSelect(journal)} 
                             style={{ cursor: 'pointer'}}>
                             <p><strong>Date:</strong> {journal.date}</p>
                         </div>
@@ -93,7 +96,7 @@ const Journal = () => {
                 </div>
                 <div className="rightContainer">
                     <div className="journalTitleContainer">
-                        📝{getTodaysDate()}
+                        📝{journalDate ? journalDate : getTodaysDate()}
                     </div>
                     <div className="journalContainer">
                         <div className="entryPage">
