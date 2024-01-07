@@ -84,9 +84,6 @@ nav a:active {
   background-color: #4CAF50;
 }
 
-.chatWindow {
-  padding: 10px;
-}
 
 .mainContainer {
     display: flex;
@@ -102,8 +99,8 @@ nav a:active {
 }
 
 .journalsBrowser {
-    width: 20%;
-    padding: 10px;
+    width: 15%;
+    padding: 20px;
     margin-top: 10px;
     /* background-color: #686868; */
 }
@@ -131,28 +128,44 @@ nav a:active {
   max-width: 75%;
   float: right;
   clear: both;
+  overflow-y: auto;
+
+
+}
+
+.chat{
+  overflow-y : "scroll";
+  height : "400px";
+
 }
 
 .botMessage {
   border: 2px solid #4C50AF;
-  border-radius: 10px;
-  padding: 10px;
   background-color: #4C50AF;
-  display: inline-block;
-  margin-bottom: 10px;
-  word-wrap: break-word;
-  max-width: 75%;
   float: left;
-  clear: both;
+
+
 }
 
 .messageInput {
   background-color: #333;
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
   box-sizing: border-box;
+  display : flex;
+  align-items : center;
+  margin-bottom: 20px; 
+  position: fixed;
+  bottom: 0;
+  height : 3%;
+  width: 80%;
+  text-align: right;
+}
+.chatInputCover{
+  position: fixed;
+  bottom: 0;
+  width : 80%;
+  height : 5%;
+  background-color: #444;
 }
 
 .entryHeader {
@@ -191,6 +204,12 @@ nav a:active {
   box-sizing: border-box;
   margin-bottom: 1em;
   margin-top: 0.25em;
+}
+
+body{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top : 0 ;
 }
 
 .goalPrompt {
