@@ -36,7 +36,7 @@ const Journal = () => {
             setJournals(journalsData);
         };
         getJournals();
-        setJournalDate();
+        setJournalDate("07-01-2024");
     }, [])
     
     const getTodaysDate = () => {
