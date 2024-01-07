@@ -63,12 +63,12 @@ const Journal = () => {
         .then(response => {
             console.log("response:", response)
             response.json() 
+            window.location.reload();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 
-        window.location.reload();
     }
    
     const handleJournalChange = (event) => {
