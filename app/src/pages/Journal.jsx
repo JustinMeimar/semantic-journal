@@ -22,10 +22,11 @@ const Journal = () => {
     useEffect(() => {
         const getJournals = async () => {
             const journalsData = await fetchJournals();
+            setJournalContent(journalsData[0].content);
             setJournals(journalsData);
         };
-        getJournals(); 
-    }, [journalContent])
+        getJournals();
+    }, [])
     
     const getTodaysDate = () => {
         const today = new Date();
@@ -57,7 +58,8 @@ const Journal = () => {
         .catch((error) => {
             console.error('Error:', error);
         });
-        setJournalContent("");
+
+        window.location.reload();
     }
    
     const handleJournalChange = (event) => {

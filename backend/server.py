@@ -67,24 +67,26 @@ def add_journal():
     else:
         return jsonify({"error": "Goal not found"}), 404
 
-    # TODO: proprely implement the GPT stuff  
-    # call functions to get numbers from prompts
-    # convos = init_chat(goal_data['metrics'])
+    # TODO: properly implement the GPT stuff
     # nums = get_nums(convos, request_data['content'])
-    nums = [7,8,9]
+    nums = [7, 8, 9]
+    existing_journal = next((item for item in goal_data['journals'] if item['date'] == request_data['date']), None)
 
-    new_journal_entry = {
-        "date": request_data['date'],
-        "content": request_data['content'],
-        "quantities": nums
-    }
-    goal_data['journals'].append(new_journal_entry)
+    if existing_journal:
+        existing_journal['content'] = request_data['content']
+        existing_journal['quantities'] = nums
+    else:
+        new_journal_entry = {
+            "date": request_data['date'],
+            "content": request_data['content'],
+            "quantities": nums
+        }
+        goal_data['journals'].append(new_journal_entry)
 
     with open(goals_file_path, 'w') as file:
         json.dump(goal_data, file, indent=4)
 
-    return jsonify({"message": "Journal added successfully"})
-
+    return jsonify({"message": "Journal updated successfully" if existing_journal else "Journal added successfully"})
 
 @app.route('/get_journals', methods=['GET'])
 def get_journals():
