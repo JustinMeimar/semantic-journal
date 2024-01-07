@@ -181,4 +181,13 @@ nav a:active {
 
 #myChart {
   max-width: 800px;
+  max-height: 500px;
+  float: center;
+}
+
+.chartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

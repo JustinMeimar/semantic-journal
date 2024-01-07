@@ -125,7 +125,9 @@ const Home = () => {
                 </button>
             </form>
             <br /><br />
-            <canvas id="myChart" ref={chartRef} />
+            <div className="chartContainer">
+                <canvas id="myChart" ref={chartRef} />
+            </div>
         </div>
     );
 };
