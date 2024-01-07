@@ -8,6 +8,9 @@ Each day, you can then create a journal entry where you talk about your efforts.
 She will handle all the evaluation for you.
 At any time, you can chat with her about how your progress is going.
 
+<br>
+Created using a Flask backend, and a react.js frontend, with GPT-4 integration.
+
 ## Running Instructions
 
 Start Frontend
