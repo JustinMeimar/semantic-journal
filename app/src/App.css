@@ -88,6 +88,14 @@ nav a:active {
   padding: 10px;
 }
 
+.journalTitleContainer {
+    font-size: 48px; /* Large font size */
+    text-align: center; /* Centers text horizontally */
+    display: block; /* Use block to occupy the entire line */
+    width: 100%; /* Full width to ensure centering */
+    margin: 20px 0; /* Margin for spacing around the container */
+}
+
 .clientMessage {
   border: 2px solid #4CAF50;
   border-radius: 10px;

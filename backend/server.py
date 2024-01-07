@@ -66,10 +66,12 @@ def add_journal():
             goal_data = json.load(file)
     else:
         return jsonify({"error": "Goal not found"}), 404
-    
+
+    # TODO: proprely implement the GPT stuff  
     # call functions to get numbers from prompts
-    convos = init_chat(goal_data['metrics'])
-    nums = get_nums(convos, request_data['content'])
+    # convos = init_chat(goal_data['metrics'])
+    # nums = get_nums(convos, request_data['content'])
+    nums = [7,8,9]
 
     new_journal_entry = {
         "date": request_data['date'],

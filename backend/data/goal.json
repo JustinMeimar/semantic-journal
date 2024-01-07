@@ -1,9 +1,19 @@
 {
-    "goal": "running",
+    "goal": "test",
     "metrics": {
         "metric-1": "mock metric",
         "metric-2": "mock metric",
         "metric-3": "mock metric"
     },
-    "journals": []
+    "journals": [
+        {
+            "date": "06-01-2024",
+            "content": "the next, next day",
+            "quantities": [
+                7,
+                8,
+                9
+            ]
+        }
+    ]
 }
