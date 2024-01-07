@@ -101,6 +101,17 @@ def get_journals():
     else:
         return jsonify({"error": "Goal not found"}), 404
 
+@app.route('/get_goal', methods=['GET'])
+def get_goal():
+    goals_file_path = os.path.join(data_dir, 'goal.json')
+
+    if os.path.isfile(goals_file_path):
+        with open(goals_file_path, 'r') as file:
+            goal_data = json.load(file)
+        return jsonify(goal_data)
+    else:
+        return jsonify({"error": "Goal not found"}), 404
+
 def gpt_response(user_message, goal_data):
     from openai import OpenAI
     from dotenv import load_dotenv

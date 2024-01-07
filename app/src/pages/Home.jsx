@@ -5,13 +5,20 @@ const urlBase = "http://127.0.0.1:5000"
 
 const fetchJournals = async () => {
     try {
-        const response = await fetch(`${urlBase}/get_journals`);
+        const response = await fetch(`${urlBase}/get_goal`);
         const journalsJSON = await response.json();
         return journalsJSON;
     } catch (error) {
         console.log("Error:", error);
         return [];
     }
+}
+
+let global_metrics = {
+    "metric-1": "metric-1",
+    "metric-2": "metric-2",
+    "metric-3": "metric-3",
+
 }
 
 const Home = () => {
@@ -40,22 +47,22 @@ const Home = () => {
             chartInstanceRef.current = new Chart(ctx, {
                 type: "line",
                 data: {
-                    labels: ["", "", "", "", "", "", ""],
+                    labels: [""],
                     datasets: [{ 
-                        data: [86,114,106,106,107,111,133],
-                        label: metrics["metric-1"], 
+                        data: [0],
+                        label: global_metrics["metric-1"], 
                         borderColor: "#3e95cd",
                         backgroundColor: "#7bb6dd",
                         fill: false,
                     }, { 
-                        data: [70,90,44,60,83,90,100],
-                        label: metrics["metric-2"], 
+                        data: [0],
+                        label: global_metrics["metric-2"], 
                         borderColor: "#3cba9f",
                         backgroundColor: "#71d1bd",
                         fill: false,
                     }, { 
-                        data: [10,21,60,44,17,21,17],
-                        label: metrics["metric-3"], 
+                        data: [0],
+                        label: global_metrics["metric-3"], 
                         borderColor: "#ffa500",
                         backgroundColor:"#ffc04d",
                         fill: false,
@@ -96,7 +103,9 @@ const Home = () => {
 
     useEffect(() => {
         const getJournals = async () => {
-            const journalsData = await fetchJournals();
+            const goalData = await fetchJournals();
+            let global_metrics = goalData.metrics;
+            let journalsData = goalData.journals;
             if (journalsData && journalsData.length > 0) {
                 setJournalContent(journalsData[0].content);
             } else {
@@ -130,19 +139,19 @@ const Home = () => {
                         labels: labels,
                         datasets: [{ 
                             data: data0,
-                            label: metrics["metric-1"], 
+                            label: global_metrics["metric-1"], 
                             borderColor: "#3e95cd",
                             backgroundColor: "#7bb6dd",
                             fill: false,
                         }, { 
                             data: data1,
-                            label: metrics["metric-2"], 
+                            label: global_metrics["metric-2"], 
                             borderColor: "#3cba9f",
                             backgroundColor: "#71d1bd",
                             fill: false,
                         }, { 
                             data: data2,
-                            label: metrics["metric-3"], 
+                            label: global_metrics["metric-3"], 
                             borderColor: "#ffa500",
                             backgroundColor:"#ffc04d",
                             fill: false,
@@ -204,6 +213,7 @@ const Home = () => {
         .then(data => {
             console.log('Metrics:', data);
             setMetrics(data);
+            global_metrics = data;
         })
         .catch((error) => {
             console.error('Error:', error);

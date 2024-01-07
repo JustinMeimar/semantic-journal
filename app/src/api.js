@@ -49,3 +49,14 @@ const get_journals = () => {
         console.error('Error:', error);
     });
 }
+
+const get_goal = () => {
+    fetch(`${apiUrl}/get_goal`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Goal:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
