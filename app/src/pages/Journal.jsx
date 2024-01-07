@@ -31,7 +31,7 @@ const Journal = () => {
             if (journalsData && journalsData.length > 0) {
                 setJournalContent(journalsData[0].content);
             } else {
-                setJournalContent("No journals available.");
+                setJournalContent("");
             }
             setJournals(journalsData);
         };
