@@ -59,6 +59,7 @@ class Chat extends React.Component {
     render() {
         return (
             <div className="chatWindow">
+                <div className="chatContent">
                 <ul className="chat" id="chatList">
                     {this.state.groupMessage.map(data => (
                         <div key={data.id}>
@@ -78,15 +79,21 @@ class Chat extends React.Component {
                         </div>
                     ))}
                 </ul>
-                <div className="chatInputWrapper">
-                    <form onSubmit={this.handleSubmit}>
-                        <input
-                        className="messageInput"
-                        type="text"
-                        placeholder="Enter your message..."
-                        onChange={this.handleChange}
-                        />
-                    </form>
+
+                </div>
+                <div className="chatInputCover">
+                    <div className="chatInputWrapper">
+                        <form onSubmit={this.handleSubmit}>
+                            <input
+                            className="messageInput"
+                            type="text"
+                            placeholder="Enter your message..."
+                            onChange={this.handleChange}
+                            />
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
         );

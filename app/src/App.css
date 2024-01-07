@@ -84,12 +84,8 @@ nav a:active {
   background-color: #4CAF50;
 }
 
-.chatWindow {
-  padding: 10px;
-  overflow: hidden;
-}
 
-.clientMessage {
+.clientMessage, .botMessage {
   border: 2px solid #4CAF50;
   border-radius: 10px;
   padding: 10px;
@@ -100,32 +96,44 @@ nav a:active {
   max-width: 75%;
   float: right;
   clear: both;
+  overflow-y: auto;
+
+
+}
+
+.chat{
+  overflow-y : "scroll";
+  height : "400px";
+
 }
 
 .botMessage {
   border: 2px solid #4C50AF;
-  border-radius: 10px;
-  padding: 10px;
   background-color: #4C50AF;
-  display: inline-block;
-  margin-bottom: 10px;
-  word-wrap: break-word;
-  max-width: 75%;
   float: left;
-  clear: both;
+
+
 }
 
 .messageInput {
   background-color: #333;
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
   box-sizing: border-box;
   display : flex;
   align-items : center;
-  padding : 10px;
-  
+  margin-bottom: 20px; 
+  position: fixed;
+  bottom: 0;
+  height : 3%;
+  width: 80%;
+  text-align: right;
+}
+.chatInputCover{
+  position: fixed;
+  bottom: 0;
+  width : 80%;
+  height : 5%;
+  background-color: #444;
 }
 
 .entryHeader {
