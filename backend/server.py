@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import json
 import os
 import openai
@@ -12,7 +12,7 @@ if not os.path.exists(data_dir):
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*" : {"origins":"http://localhost:3000"}})
 
 @app.route('/')
 def index():
@@ -98,6 +98,27 @@ def get_journals():
         return jsonify(goal_data.get('journals', []))
     else:
         return jsonify({"error": "Goal not found"}), 404
+
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    request_data = request.get_json()
+
+    if 'message' not in request_data:
+        return jsonify({"error": "Invalid request data"}), 400
+    # request["message"]   holds data being sent
+    # connect to API TODO
+
+
+
+    return jsonify({"message": "Send data"})
+
+@app.route('/get_message', methods=["GET"])
+def get_message():
+    # stub function, add chat functionality
+
+    return jsonify({"message": "textData"})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
