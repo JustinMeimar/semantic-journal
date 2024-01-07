@@ -179,3 +179,34 @@ body{
   margin-right: 10%;
   margin-top : 0 ;
 }
+
+.goalPrompt {
+  background-color: #333;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.goalSubmit {
+  background-color: #4CAF50;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  margin-top: 0.25em;
+}
+
+#myChart {
+  max-width: 800px;
+  max-height: 500px;
+  float: center;
+}
+
+.chartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

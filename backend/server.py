@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 import os
+import openai
+
+from quantify_goals import *
 
 data_dir = "data"
 if not os.path.exists(data_dir):
@@ -15,10 +18,39 @@ CORS(app)
 def index():
     return "hello"
 
-@app.route('/')
+def create_goal(goal, metrics):
+
+    request_data = request.get_json()
+    new_goal = {
+        "goal": goal,
+        "metrics": metrics, 
+        "journals": []
+    }
+    goals_file_path = os.path.join(data_dir, 'goal.json')
+    with open(goals_file_path, 'w') as file:
+        json.dump(new_goal, file, indent=4)
+
+@app.route('/gen_metrics', methods=['POST'])
 def gen_metrics():
 
-    return jsonify({"metric-1": "mock metric"})
+    request_data = request.get_json()
+
+    if 'goal' not in request_data:
+        return jsonify({"error": "Invalid request data"}), 400
+
+    goal = request_data['goal']
+
+    # seif generate metrics function here
+
+    metrics = {
+        "metric-1": "mock metric",
+        "metric-2": "mock metric",
+        "metric-3": "mock metric"
+    }
+    
+    create_goal(goal, metrics)
+    
+    return jsonify(metrics)
 
 @app.route('/add_journal', methods=['POST'])
 def add_journal():
@@ -34,10 +66,15 @@ def add_journal():
             goal_data = json.load(file)
     else:
         return jsonify({"error": "Goal not found"}), 404
+    
+    # call functions to get numbers from prompts
+    convos = init_chat(goal_data['metrics'])
+    nums = get_nums(convos, request_data['content'])
 
     new_journal_entry = {
         "date": request_data['date'],
-        "content": request_data['content']
+        "content": request_data['content'],
+        "quantities": nums
     }
     goal_data['journals'].append(new_journal_entry)
 
@@ -57,25 +94,6 @@ def get_journals():
         return jsonify(goal_data.get('journals', []))
     else:
         return jsonify({"error": "Goal not found"}), 404
-
-@app.route('/create_goal', methods=['POST'])
-def create_goal():
-    request_data = request.get_json()
-
-    if 'metrics' not in request_data or not isinstance(request_data['metrics'], list):
-        return jsonify({"error": "Invalid or missing 'metrics' in request"}), 400
-
-    new_goal = {
-        "goal": request_data.get("goal", "unnamed-goal"),
-        "metrics": request_data['metrics'],
-        "journals": []
-    }
-
-    goals_file_path = os.path.join(data_dir, 'goal.json')
-    with open(goals_file_path, 'w') as file:
-        json.dump(new_goal, file, indent=4)
-
-    return jsonify({"message": "Goal data saved successfully"})
 
 if __name__ == '__main__':
     app.run(debug=True)
