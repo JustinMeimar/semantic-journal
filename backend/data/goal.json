@@ -1,0 +1,9 @@
+{
+    "goal": "running",
+    "metrics": {
+        "metric-1": "mock metric",
+        "metric-2": "mock metric",
+        "metric-3": "mock metric"
+    },
+    "journals": []
+}
